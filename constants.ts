@@ -38,10 +38,10 @@ export const PROJECTS: Project[] = [
     tags: ['Next.js', 'AI Agents', 'Data Visualization', 'Marketing Tech'],
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop', // Analytics/Dashboard vibe
     featured: true,
-    year: 'In Progress',
+    year: '2025',
     role: 'Creator & Lead Developer',
     link: '#', 
-    github: 'https://github.com/Shantanu-Tiwari'
+    github: 'https://github.com/Shantanu-Tiwari/northbound-ai'
   },
   {
     id: 'proj4',
@@ -54,10 +54,10 @@ export const PROJECTS: Project[] = [
     tags: ['Next.js', 'React', 'Prisma', 'Stripe', 'Tailwind CSS'],
     image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=2574&auto=format&fit=crop',
     featured: true,
-    year: '2024',
+    year: '2025',
     role: 'Fullstack Developer',
     link: '#',
-    github: 'https://github.com/Shantanu-Tiwari'
+    github: 'https://github.com/Shantanu-Tiwari/skilldev'
   },
   {
     id: 'proj1',
@@ -70,9 +70,9 @@ export const PROJECTS: Project[] = [
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Zustand', 'Shadcn UI'],
     image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop',
     featured: true,
-    year: '2024',
+    year: '2025',
     role: 'Fullstack Developer',
-    link: '#', // Placeholder as per resume "Live"
+    link: 'https://api-nexus-landing.vercel.app/',
     github: 'https://github.com/Shantanu-Tiwari'
   },
   {
@@ -86,9 +86,9 @@ export const PROJECTS: Project[] = [
     tags: ['Next.js', 'FastAPI', 'Modal', 'Python', 'Bioinformatics'],
     image: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=2080&auto=format&fit=crop',
     featured: false,
-    year: '2024',
+    year: '2025',
     role: 'Lead Developer',
-    link: '#',
+    link: 'https://evo-scan.vercel.app/',
     github: 'https://github.com/Shantanu-Tiwari'
   },
   {
@@ -104,7 +104,7 @@ export const PROJECTS: Project[] = [
     featured: false,
     year: '2024',
     role: 'Fullstack Developer',
-    link: '#',
+    link: 'https://code-craft-umber.vercel.app/',
     github: 'https://github.com/Shantanu-Tiwari'
   },
   {
@@ -118,9 +118,25 @@ export const PROJECTS: Project[] = [
     tags: ['React', 'TypeScript', 'CSS', 'Vercel'],
     image: 'https://images.unsplash.com/photo-1629654297299-c8506221ca97?q=80&w=1974&auto=format&fit=crop',
     featured: false,
-    year: '2024',
+    year: '2025',
     role: 'Frontend Developer',
     link: 'https://shantanu-terminal.vercel.app/',
+    github: 'https://github.com/Shantanu-Tiwari'
+  },
+  {
+    id: 'bloggr',
+    title: 'Bloggr',
+    description: 'Modern blogging platform with rich text editing and social features.',
+    fullDescription: 'Bloggr is a modern, feature-rich blogging platform that combines elegant design with powerful functionality. Built for writers and content creators who want a seamless publishing experience with social engagement features.',
+    challenge: 'Creating a user-friendly content management system with real-time collaboration, rich text editing, and social features while maintaining fast performance and SEO optimization.',
+    solution: 'Developed using Next.js with a headless CMS architecture. Implemented rich text editing with draft-js, real-time features with WebSockets, and optimized for SEO with server-side rendering.',
+    features: ['Rich Text Editor', 'Real-time Collaboration', 'Social Engagement', 'SEO Optimized', 'Responsive Design'],
+    tags: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Prisma', 'PostgreSQL'],
+    image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop',
+    featured: false,
+    year: '2025',
+    role: 'Fullstack Developer',
+    link: 'https://bloggr.shantanutiwari.me/',
     github: 'https://github.com/Shantanu-Tiwari'
   }
 ];
@@ -131,7 +147,7 @@ export const SOCIALS: SocialLink[] = [
 ];
 
 export const TECH_STACK = [
-  'Python', 'Java', 'TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'FastAPI', 'PostgreSQL', 'Docker', 'AWS', 'GCP', 'Modal', 'Shadcn UI'
+  'Python', 'Java', 'TypeScript', 'React', 'Next.js', 'Node.js', 'FastAPI', 'PostgreSQL', 'MongoDB', 'Redis', 'Docker', 'Kubernetes', 'AWS', 'GCP', 'Vercel', 'Git', 'Linux', 'Nginx', 'Tailwind CSS', 'Prisma', 'GraphQL', 'REST APIs'
 ];
 
 export const AI_SYSTEM_INSTRUCTION = `

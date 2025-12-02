@@ -132,7 +132,7 @@ const HomeView: React.FC<{ onOpenProject: (project: Project) => void; onViewAllP
                 </a>
 
                 <a 
-                    href="/resume.pdf" 
+                    href="/ShantanuResume.pdf" 
                     download="Shantanu_Tiwari_Resume.pdf"
                     className="group flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 hover:bg-primary/10 border border-primary/10 hover:border-primary/20 text-primary transition-all duration-300 text-sm font-medium ml-2"
                     aria-label="Download Resume"
@@ -257,7 +257,7 @@ const HomeView: React.FC<{ onOpenProject: (project: Project) => void; onViewAllP
                 <h3 className="text-sm font-mono uppercase text-secondary mb-4">Technologies</h3>
                 <div className="flex flex-wrap gap-2">
                     {TECH_STACK.map(tech => (
-                        <span key={tech} className="px-3 py-1 bg-background/30 rounded-md text-xs text-primary hover:bg-background/50 transition-colors cursor-default">
+                        <span key={tech} className="px-3 py-1 bg-background/30 rounded-md text-xs text-primary hover:bg-primary hover:text-background hover:scale-105 transition-all duration-200 cursor-pointer">
                             {tech}
                         </span>
                     ))}

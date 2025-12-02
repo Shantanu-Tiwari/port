@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shantanutiwari.com/sitemap.xml
