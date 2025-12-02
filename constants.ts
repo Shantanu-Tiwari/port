@@ -1,103 +1,87 @@
-
 import { Project, Experience, SocialLink } from './types';
 
-export const ABOUT_ME = `I'm Alex, a Fullstack Engineer specialized in building AI-native applications. I bridge the gap between robust web infrastructure and cutting-edge generative AI models. Currently obsessing over agentic workflows and React Server Components.`;
+export const ABOUT_ME = `I'm Shantanu Tiwari, a Fullstack Web + AI Developer pursuing a B.Sc in Computer Science (Data Science) in Noida, India. I specialize in building intelligent applications that bridge the gap between traditional web architectures and cutting-edge AI models. My focus is on creating scalable, user-centric solutions using Next.js, Cloud platforms, and Multimodal AI.`;
 
 export const EXPERIENCES: Experience[] = [
   {
     id: '1',
-    role: 'Senior AI Engineer',
-    company: 'Nexus AI',
-    period: '2023 - Present',
-    description: 'Leading the frontend architecture for a generative AI video platform. Implemented real-time streaming protocols and optimized inference latency.',
+    role: 'Full Stack Developer Intern',
+    company: 'Ascendix IT',
+    period: 'June 2025 – July 2025',
+    description: 'Developing a SaaS platform for AI-driven podcast clipping, using multimodal models to detect viral moments and generate vertical clips. Contributing to a real-time voice-based AI application by integrating STT and TTS services. Also collaborating on freelance React-based apps and Electron desktop tools.',
   },
   {
     id: '2',
-    role: 'Fullstack Developer',
-    company: 'Vercel (Contract)',
-    period: '2021 - 2023',
-    description: 'Contributed to the core Next.js edge runtime. Built internal tooling for deployment analytics.',
-  },
-  {
-    id: '3',
-    role: 'Frontend Engineer',
-    company: 'StartUp Inc',
-    period: '2019 - 2021',
-    description: 'Migrated legacy PHP monolith to React/TypeScript. Improved page load speed by 40%.',
+    role: 'Software Development Intern',
+    company: 'Central Ground Water Board',
+    period: 'April 2025 – May 2025',
+    description: 'Designed a responsive dashboard to visualize groundwater monitoring data, improving transparency for CGWB. Implemented features like dropdowns, search filters, and responsive maps. Integrated Python scripts to automate the ingestion of XML/CSV datasets into the web app.',
   },
 ];
 
 export const PROJECTS: Project[] = [
   {
     id: 'proj1',
-    title: 'Cognition Flow',
-    description: 'An AI-powered workspace that auto-organizes your notes using Gemini 1.5 Pro.',
-    fullDescription: 'Cognition Flow reimagines personal knowledge management by acting as an active agent in your note-taking process. Instead of static text, every note is embedded into a vector space, allowing for semantic connections that surface relevant information exactly when you need it.',
-    challenge: 'Users often hoard information but struggle to retrieve it. Traditional keyword search fails when concepts are related conceptually but not lexically. We needed a system that "understands" the intent behind the notes.',
-    solution: 'We built a RAG (Retrieval Augmented Generation) pipeline using Gemini 1.5 Pro. Every keystroke is analyzed asynchronously. When a user types about "deployment", the system proactively sidebar-surfaces their previous notes on "Docker" and "AWS" without manual tagging.',
-    features: ['Real-time Semantic Search', 'Auto-tagging taxonomy', 'Graph visualization of ideas', 'Multi-modal input (Images/Audio)'],
-    tags: ['Next.js', 'Gemini API', 'Vector DB', 'Tailwind'],
-    image: 'https://picsum.photos/1200/800?random=1',
+    title: 'API Nexus',
+    description: 'A robust Postman-like API testing workspace built for the web.',
+    fullDescription: 'API Nexus is a comprehensive full-stack API testing environment designed to mirror the functionality of industry standards like Postman. It provides developers with a robust interface for HTTP request management directly in the browser, eliminating the need for heavy desktop clients.',
+    challenge: 'Building a performant, client-side heavy application that handles complex HTTP request/response cycles, including headers, body parsing, and history management, while maintaining a clean and accessible UI.',
+    solution: 'Leveraged Next.js for the framework and Zustand for complex state management of request history and configurations. Shadcn UI was used to ensure accessible and consistent design patterns. The architecture is optimized for speed and deployed on Vercel for scalability.',
+    features: ['Request History & Collections', 'Response Preview with Syntax Highlighting', 'Customizable Headers & Body', 'Error Handling & Status Codes'],
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Zustand', 'Shadcn UI'],
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop',
     featured: true,
     year: '2024',
-    role: 'Lead Engineer',
-    link: 'https://example.com',
-    github: 'https://github.com'
+    role: 'Fullstack Developer',
+    link: '#', // Placeholder as per resume "Live"
+    github: 'https://github.com/Shantanu-Tiwari'
   },
   {
     id: 'proj2',
-    title: 'VoiceAgent.js',
-    description: 'Open source library for building real-time voice conversational agents in the browser.',
-    fullDescription: 'VoiceAgent.js is a lightweight abstraction layer over the Web Audio API and WebRTC, designed to make building voice-to-voice AI assistants accessible to frontend developers. It handles VAD (Voice Activity Detection), buffering, and echo cancellation out of the box.',
-    challenge: 'Browser-based audio handling is notoriously difficult due to varying sampling rates, latency issues, and browser inconsistencies. Developers spending time on low-level audio plumbing instead of application logic.',
-    solution: 'I created a framework-agnostic library that normalizes audio streams into a consistent 16kHz 16-bit PCM format, ready for direct streaming to LLM WebSocket endpoints. It includes a custom VAD worklet that runs off the main thread.',
-    features: ['Browser-agnostic AudioWorklet', 'Client-side VAD', 'Zero-dependency', 'React Hooks included'],
-    tags: ['TypeScript', 'WebAudio API', 'Node.js'],
-    image: 'https://picsum.photos/1200/800?random=2',
+    title: 'EvoScan',
+    description: 'Pathogenic variant prediction platform using the Evo2 deep learning model.',
+    fullDescription: 'EvoScan is a specialized bioinformatics platform that leverages the Evo2 deep learning model to analyze genetic mutations and predict pathogenicity. It bridges complex ML inference with a user-friendly web interface for researchers.',
+    challenge: 'Serving a heavy deep learning model (Evo2) cost-effectively while providing real-time analysis results to users. Integrating disparate real-time biological data sources like UCSC Genome Browser and NCBI ClinVar.',
+    solution: 'Architected a hybrid system using Next.js for the frontend and FastAPI for the backend. The critical ML inference engine was deployed on Modal, utilizing scalable, GPU-backed serverless execution to serve predictions on demand without maintaining expensive always-on GPU instances.',
+    features: ['Deep Learning Inference (Evo2)', 'Real-time Gene Data Integration', 'GPU-backed Serverless Backend', 'Interactive Variant Analysis'],
+    tags: ['Next.js', 'FastAPI', 'Modal', 'Python', 'Bioinformatics'],
+    image: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=2080&auto=format&fit=crop',
     featured: true,
-    year: '2023',
-    role: 'Maintainer'
+    year: '2024',
+    role: 'Lead Developer',
+    link: '#',
+    github: 'https://github.com/Shantanu-Tiwari'
   },
   {
     id: 'proj3',
-    title: 'Syntax UI',
-    description: 'A component library designed for AI interfaces, featuring streaming text components.',
-    fullDescription: 'Syntax UI fills the gap in current UI libraries which are static-first. AI interfaces require components that handle streaming states, thinking indicators, and markdown rendering efficiently.',
-    challenge: 'Standard UI kits flash or jitter when displaying streaming tokens from an LLM. There was no standardized way to visualize "thinking" or "searching" states in a chat interface.',
-    solution: 'A collection of React components optimized for high-frequency updates. It uses a custom virtualizer for chat lists and CSS-based layout stability techniques to prevent layout shift during generation.',
-    tags: ['React', 'Storybook', 'CSS Modules'],
-    image: 'https://picsum.photos/1200/800?random=3',
+    title: 'Code Craft',
+    description: 'Online multi-language code editor and compiler with real-time sharing.',
+    fullDescription: 'Code Craft is a browser-based IDE allowing users to write, compile, and share code in multiple languages instantly. It mimics the experience of desktop editors like VS Code but runs entirely in the cloud.',
+    challenge: 'Implementing secure, real-time code execution and synchronization for sharing snippets, while providing a rich editing experience with syntax highlighting and auto-completion.',
+    solution: 'Integrated Monaco Editor (the engine behind VS Code) for a premium editing experience. Built a subscription system and utilized Zustand for efficient state management. The compilation engine handles multiple languages securely.',
+    features: ['Multi-language Support', 'Monaco Editor Integration', 'Real-time Compilation', 'Code Snippet Sharing', 'Subscription System'],
+    tags: ['Next.js', 'Tailwind CSS', 'Monaco Editor', 'Zustand'],
+    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=2069&auto=format&fit=crop',
     featured: false,
-    year: '2023',
-    role: 'Solo Developer'
-  },
-  {
-    id: 'proj4',
-    title: 'RepoChat',
-    description: 'Chat with any GitHub repository. Uses RAG to answer code-specific questions.',
-    fullDescription: 'RepoChat allows developers to onboard to new codebases faster by asking natural language questions. It indexes the AST (Abstract Syntax Tree) of the code to understand function relationships, not just text matches.',
-    tags: ['Python', 'LangChain', 'React'],
-    image: 'https://picsum.photos/1200/800?random=4',
-    featured: false,
-    year: '2022',
-    role: 'Fullstack',
-    github: 'https://github.com'
+    year: '2024',
+    role: 'Fullstack Developer',
+    link: '#',
+    github: 'https://github.com/Shantanu-Tiwari'
   },
 ];
 
 export const SOCIALS: SocialLink[] = [
-  { platform: 'GitHub', url: 'https://github.com', icon: 'Github' },
-  { platform: 'Twitter', url: 'https://twitter.com', icon: 'Twitter' },
-  { platform: 'LinkedIn', url: 'https://linkedin.com', icon: 'Linkedin' },
+  { platform: 'GitHub', url: 'https://github.com/Shantanu-Tiwari', icon: 'Github' },
+  { platform: 'LinkedIn', url: 'https://linkedin.com/in/shantanutiwari24', icon: 'Linkedin' },
 ];
 
 export const TECH_STACK = [
-  'TypeScript', 'React', 'Next.js', 'Node.js', 'Python', 'PostgreSQL', 'Docker', 'AWS', 'Gemini API', 'PyTorch'
+  'Python', 'Java', 'TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'FastAPI', 'PostgreSQL', 'Docker', 'AWS', 'GCP', 'Modal', 'Shadcn UI'
 ];
 
 export const AI_SYSTEM_INSTRUCTION = `
-You are the digital assistant for Alex Chen's portfolio website. 
-Alex is a Fullstack Web + AI Developer.
+You are the digital assistant for Shantanu Tiwari's portfolio website. 
+Shantanu is a Fullstack Web + AI Developer based in Noida, India.
 Use the following context to answer visitor questions:
 
 About: ${ABOUT_ME}
@@ -106,7 +90,7 @@ Projects: ${JSON.stringify(PROJECTS)}
 Stack: ${TECH_STACK.join(', ')}
 
 Tone: Professional, concise, slightly technical but accessible.
-If asked about contact info, suggest emailing alex@example.com.
-If asked about something not in the context, politely mention you only know about Alex's professional background.
+If asked about contact info, suggest emailing shantanutiwarigzb@gmail.com.
+If asked about something not in the context, politely mention you only know about Shantanu's professional background.
 Keep answers under 100 words unless requested otherwise.
 `;

@@ -1,8 +1,8 @@
-
 import React, { useState, useEffect, useRef } from 'react';
-import { Github, Twitter, Linkedin, Mail, ArrowUpRight, Sun, Moon, Brain, Zap, Layout, Calendar, ArrowLeft, ExternalLink, Code } from 'lucide-react';
+import { Github, Twitter, Linkedin, Mail, ArrowUpRight, Sun, Moon, Brain, Zap, Layout, Calendar, ArrowLeft, ExternalLink, Code, FileDown } from 'lucide-react';
 import { ABOUT_ME, EXPERIENCES, PROJECTS, TECH_STACK, SOCIALS } from './constants';
 import AIChat from './components/AIChat';
+import GitHubChart from './components/GitHubChart';
 import { Experience, Project } from './types';
 
 // --- Animated Timeline Item Component ---
@@ -41,6 +41,41 @@ const TimelineItem: React.FC<{ experience: Experience; index: number }> = ({ exp
   );
 };
 
+// --- Slide In Component ---
+const SlideInView: React.FC<{ children: React.ReactNode; direction: 'left' | 'right'; className?: string }> = ({ children, direction, className = '' }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const domRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const currentElement = domRef.current;
+    if (currentElement) observer.observe(currentElement);
+
+    return () => {
+      if (currentElement) observer.unobserve(currentElement);
+    };
+  }, []);
+
+  const translateClass = direction === 'left' ? '-translate-x-12' : 'translate-x-12';
+
+  return (
+    <div 
+      ref={domRef} 
+      className={`${className} transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-x-0' : `opacity-0 ${translateClass}`}`}
+    >
+      {children}
+    </div>
+  );
+};
+
 // --- Home View Component ---
 const HomeView: React.FC<{ onOpenProject: (project: Project) => void; isDarkMode: boolean; toggleTheme: () => void }> = ({ onOpenProject, isDarkMode, toggleTheme }) => {
   return (
@@ -50,9 +85,9 @@ const HomeView: React.FC<{ onOpenProject: (project: Project) => void; isDarkMode
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/20">
-                    <span className="font-bold text-background text-lg">A</span>
+                    <span className="font-bold text-background text-lg">S</span>
                 </div>
-                <span className="font-mono text-sm text-secondary">Alex Chen / Portfolio</span>
+                <span className="font-mono text-sm text-secondary">Shantanu Tiwari / Portfolio</span>
             </div>
             
             <button 
@@ -72,7 +107,7 @@ const HomeView: React.FC<{ onOpenProject: (project: Project) => void; isDarkMode
             {ABOUT_ME}
           </p>
 
-          <div className="flex gap-4 pt-4">
+          <div className="flex flex-wrap items-center gap-4 pt-4">
             {SOCIALS.map((social) => {
                 const Icon = social.icon === 'Github' ? Github : social.icon === 'Twitter' ? Twitter : Linkedin;
                 return (
@@ -82,13 +117,24 @@ const HomeView: React.FC<{ onOpenProject: (project: Project) => void; isDarkMode
                         target="_blank"
                         rel="noreferrer"
                         className="text-secondary hover:text-primary transition-colors hover:scale-110 duration-200"
+                        aria-label={social.platform}
                     >
                         <Icon className="w-5 h-5" />
                     </a>
                 )
             })}
-             <a href="mailto:alex@example.com" className="text-secondary hover:text-primary transition-colors hover:scale-110 duration-200">
+             <a href="mailto:shantanutiwarigzb@gmail.com" className="text-secondary hover:text-primary transition-colors hover:scale-110 duration-200" aria-label="Email">
                 <Mail className="w-5 h-5" />
+            </a>
+
+            <a 
+                href="/resume.pdf" 
+                download="Shantanu_Tiwari_Resume.pdf"
+                className="group flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 hover:bg-primary/10 border border-primary/10 hover:border-primary/20 text-primary transition-all duration-300 text-sm font-medium ml-2"
+                aria-label="Download Resume"
+            >
+                <FileDown className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                <span>Resume</span>
             </a>
           </div>
         </section>
@@ -109,28 +155,30 @@ const HomeView: React.FC<{ onOpenProject: (project: Project) => void; isDarkMode
                         onClick={() => onOpenProject(project)}
                         className={`group relative bg-surface/40 backdrop-blur-md rounded-xl overflow-hidden cursor-pointer hover:bg-surface/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/5 ${project.featured ? 'md:col-span-2' : ''}`}
                     >
-                        {project.image && project.featured && (
-                            <div className="h-48 md:h-64 overflow-hidden relative">
-                                <img 
-                                    src={project.image} 
-                                    alt={project.title}
-                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out grayscale hover:grayscale-0"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent opacity-90" />
-                            </div>
-                        )}
-                        <div className="p-6 space-y-4">
-                            <div className="flex justify-between items-start">
-                                <h3 className="text-xl font-semibold text-primary group-hover:underline decoration-secondary underline-offset-4">{project.title}</h3>
-                                <ArrowUpRight className="w-4 h-4 text-secondary group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100" />
-                            </div>
-                            <p className="text-secondary text-sm leading-relaxed">{project.description}</p>
-                            <div className="flex flex-wrap gap-2 pt-2">
-                                {project.tags.map(tag => (
-                                    <span key={tag} className="text-[10px] font-mono px-2 py-1 rounded text-secondary bg-background/30 group-hover:bg-background/50 transition-colors">
-                                        {tag}
-                                    </span>
-                                ))}
+                        <div className="relative z-20">
+                            {project.image && project.featured && (
+                                <div className="h-48 md:h-64 overflow-hidden relative rounded-t-xl">
+                                    <img 
+                                        src={project.image} 
+                                        alt={project.title}
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out grayscale hover:grayscale-0"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent opacity-90" />
+                                </div>
+                            )}
+                            <div className="p-6 space-y-4">
+                                <div className="flex justify-between items-start">
+                                    <h3 className="text-xl font-semibold text-primary group-hover:underline decoration-secondary underline-offset-4">{project.title}</h3>
+                                    <ArrowUpRight className="w-4 h-4 text-secondary group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100" />
+                                </div>
+                                <p className="text-secondary text-sm leading-relaxed">{project.description}</p>
+                                <div className="flex flex-wrap gap-2 pt-2">
+                                    {project.tags.map(tag => (
+                                        <span key={tag} className="text-[10px] font-mono px-2 py-1 rounded text-secondary bg-background/30 group-hover:bg-background/50 transition-colors">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -152,9 +200,9 @@ const HomeView: React.FC<{ onOpenProject: (project: Project) => void; isDarkMode
             </div>
         </section>
 
-        {/* Stack & Focus Area */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-surface/40 backdrop-blur-md p-6 rounded-xl hover:bg-surface/60 transition-colors duration-300">
+        {/* Stack & Focus Area (Sliding In) */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-6 overflow-hidden">
+            <SlideInView direction="left" className="bg-surface/40 backdrop-blur-md p-6 rounded-xl hover:bg-surface/60 transition-colors duration-300">
                 <h3 className="text-sm font-mono uppercase text-secondary mb-4">Technologies</h3>
                 <div className="flex flex-wrap gap-2">
                     {TECH_STACK.map(tech => (
@@ -163,9 +211,9 @@ const HomeView: React.FC<{ onOpenProject: (project: Project) => void; isDarkMode
                         </span>
                     ))}
                 </div>
-            </div>
+            </SlideInView>
 
-            <div className="bg-surface/40 backdrop-blur-md p-6 rounded-xl hover:bg-surface/60 transition-colors duration-300 flex flex-col justify-between">
+            <SlideInView direction="right" className="bg-surface/40 backdrop-blur-md p-6 rounded-xl hover:bg-surface/60 transition-colors duration-300 flex flex-col justify-between">
                  <h3 className="text-sm font-mono uppercase text-secondary mb-4">Focus</h3>
                  <div className="space-y-4">
                     <div className="flex items-center gap-3 group">
@@ -196,15 +244,27 @@ const HomeView: React.FC<{ onOpenProject: (project: Project) => void; isDarkMode
                         </div>
                     </div>
                  </div>
+            </SlideInView>
+        </section>
+
+        {/* GitHub Contributions Section */}
+        <section className="space-y-8 animate-fade-up">
+            <h2 className="text-sm font-mono uppercase tracking-wider text-secondary flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-primary/50"></div>
+                Contributions
+            </h2>
+            <div className="bg-surface/40 backdrop-blur-md p-6 rounded-xl border border-white/5 shadow-lg">
+                <div className="flex items-center justify-between mb-2">
+                     <span className="text-xs text-secondary font-mono">Last 12 Months</span>
+                     <span className="text-xs text-secondary font-mono">1,248 Contributions</span>
+                </div>
+                <GitHubChart color={isDarkMode ? '#fafafa' : '#18181b'} />
             </div>
         </section>
         
         {/* Footer */}
-        <footer className="pt-12 pb-8 border-t border-border flex flex-col md:flex-row justify-between items-center text-xs text-secondary">
-            <p>© {new Date().getFullYear()} Alex Chen. All rights reserved.</p>
-            <p className="mt-2 md:mt-0 flex items-center gap-1">
-                Designed with <span className="text-primary font-medium">Gemini</span> & <span className="text-primary font-medium">React</span>
-            </p>
+        <footer className="pt-12 pb-8 border-t border-border flex justify-center items-center text-xs text-secondary">
+            <p>© {new Date().getFullYear()} Shantanu Tiwari. All rights reserved.</p>
         </footer>
     </div>
   );
@@ -330,7 +390,7 @@ const ProjectDetail: React.FC<{ project: Project; onBack: () => void; isDarkMode
 
              {/* Footer */}
             <footer className="pt-24 pb-8 flex justify-center text-xs text-secondary">
-                <p>© {new Date().getFullYear()} Alex Chen. All rights reserved.</p>
+                <p>© {new Date().getFullYear()} Shantanu Tiwari. All rights reserved.</p>
             </footer>
         </div>
     );
