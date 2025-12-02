@@ -1,6 +1,13 @@
+
 import { Project, Experience, SocialLink } from './types';
 
-export const ABOUT_ME = `I'm Shantanu Tiwari, a Fullstack Web + AI Developer pursuing a B.Sc in Computer Science (Data Science) in Noida, India. I specialize in building intelligent applications that bridge the gap between traditional web architectures and cutting-edge AI models. My focus is on creating scalable, user-centric solutions using Next.js, Cloud platforms, and Multimodal AI.`;
+export const ABOUT_ME = `I'm Shantanu Tiwari, a Fullstack Web + AI Developer pursuing a B.Tech in Computer Science (Data Science) in Noida, India. I specialize in building intelligent applications that bridge the gap between traditional web architectures and cutting-edge AI models. My focus is on creating scalable, user-centric solutions using Next.js, Cloud platforms, and Multimodal AI.`;
+
+export const CURRENTLY_WORKING_ON = {
+  id: 'northbound', // References the project ID in the PROJECTS array
+  title: "Northbound",
+  description: "AI Ad Manager - Create, Analyze, Publish.",
+};
 
 export const EXPERIENCES: Experience[] = [
   {
@@ -20,6 +27,38 @@ export const EXPERIENCES: Experience[] = [
 ];
 
 export const PROJECTS: Project[] = [
+  {
+    id: 'northbound',
+    title: 'Northbound',
+    description: 'AI-powered Ad Manager to create, analyze, and publish ads across platforms.',
+    fullDescription: 'Northbound is an all-in-one AI Ad Manager designed to streamline the digital marketing workflow. It empowers users to generate high-converting ad creatives using Generative AI, analyze performance trends across different demographics, and publish campaigns to multiple platforms (Meta, Google, LinkedIn) from a single dashboard.',
+    challenge: 'Fragmented ad ecosystems require marketers to switch between multiple tools for creation, analytics, and publishing. unifying these APIs while providing meaningful AI-driven insights requires complex data normalization and real-time processing.',
+    solution: 'Developing a centralized dashboard using Next.js and Tailwind. Integrating Gemini/OpenAI for ad copy and image generation. The backend aggregates analytics from platform APIs, normalizing data to provide cross-platform insights.',
+    features: ['AI Ad Generation (Text & Image)', 'Cross-Platform Publishing', 'Real-time Trend Analysis', 'Unified Analytics Dashboard', 'Budget Optimization Agents'],
+    tags: ['Next.js', 'AI Agents', 'Data Visualization', 'Marketing Tech'],
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop', // Analytics/Dashboard vibe
+    featured: true,
+    year: 'In Progress',
+    role: 'Creator & Lead Developer',
+    link: '#', 
+    github: 'https://github.com/Shantanu-Tiwari'
+  },
+  {
+    id: 'proj4',
+    title: 'SkillDev LMS',
+    description: 'A comprehensive Learning Management System for online education and skill development.',
+    fullDescription: 'SkillDev is a comprehensive Learning Management System (LMS) designed to democratize online education. It provides a robust platform for instructors to create, structure, and monetize courses, while offering students an intuitive and progress-tracked learning environment.',
+    challenge: 'Managing complex relational data (courses, chapters, user progress) while ensuring smooth video streaming and secure payment processing.',
+    solution: 'Built with a Next.js App Router architecture for optimal performance. Implemented Prisma with PostgreSQL for type-safe database management. Integrated Stripe for secure checkout flows and a dedicated video hosting service for adaptive streaming.',
+    features: ['Course Creation Studio', 'Video Streaming Integration', 'Student Dashboard', 'Progress Tracking', 'Secure Payment Gateway'],
+    tags: ['Next.js', 'React', 'Prisma', 'Stripe', 'Tailwind CSS'],
+    image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=2574&auto=format&fit=crop',
+    featured: true,
+    year: '2024',
+    role: 'Fullstack Developer',
+    link: '#',
+    github: 'https://github.com/Shantanu-Tiwari'
+  },
   {
     id: 'proj1',
     title: 'API Nexus',
@@ -46,7 +85,7 @@ export const PROJECTS: Project[] = [
     features: ['Deep Learning Inference (Evo2)', 'Real-time Gene Data Integration', 'GPU-backed Serverless Backend', 'Interactive Variant Analysis'],
     tags: ['Next.js', 'FastAPI', 'Modal', 'Python', 'Bioinformatics'],
     image: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=2080&auto=format&fit=crop',
-    featured: true,
+    featured: false,
     year: '2024',
     role: 'Lead Developer',
     link: '#',
@@ -68,6 +107,22 @@ export const PROJECTS: Project[] = [
     link: '#',
     github: 'https://github.com/Shantanu-Tiwari'
   },
+  {
+    id: 'proj5',
+    title: 'Terminal Portfolio',
+    description: 'A developer-centric portfolio website featuring an interactive command-line interface.',
+    fullDescription: 'A unique portfolio experience designed for developers, mimicking a real terminal environment. Users can navigate using standard commands like ls, cd, and cat to explore projects and skills in a nostalgic, keyboard-first interface.',
+    challenge: 'Replicating the authentic feel and behavior of a terminal in a web browser, including command parsing, file system simulation, and keyboard event handling without compromising accessibility.',
+    solution: 'Developed a custom shell engine in React that manages virtual file systems and command execution. Implemented a responsive text-rendering system to ensure the terminal look-and-feel works across devices.',
+    features: ['Interactive CLI', 'Virtual File System', 'Command History', 'Theme Customization', 'Keyboard-first Navigation'],
+    tags: ['React', 'TypeScript', 'CSS', 'Vercel'],
+    image: 'https://images.unsplash.com/photo-1629654297299-c8506221ca97?q=80&w=1974&auto=format&fit=crop',
+    featured: false,
+    year: '2024',
+    role: 'Frontend Developer',
+    link: 'https://shantanu-terminal.vercel.app/',
+    github: 'https://github.com/Shantanu-Tiwari'
+  }
 ];
 
 export const SOCIALS: SocialLink[] = [

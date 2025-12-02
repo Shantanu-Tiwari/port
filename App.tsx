@@ -1,7 +1,7 @@
+
 import React, { useState, useEffect, useRef } from 'react';
-import { Github, Twitter, Linkedin, Mail, ArrowUpRight, Sun, Moon, Brain, Zap, Layout, Calendar, ArrowLeft, ExternalLink, Code, FileDown } from 'lucide-react';
-import { ABOUT_ME, EXPERIENCES, PROJECTS, TECH_STACK, SOCIALS } from './constants';
-import AIChat from './components/AIChat';
+import { Github, Twitter, Linkedin, Mail, ArrowUpRight, Sun, Moon, Brain, Zap, Layout, Calendar, ArrowLeft, ExternalLink, Code, FileDown, ArrowRight, Grid, MapPin, Loader2, GitPullRequest } from 'lucide-react';
+import { ABOUT_ME, EXPERIENCES, PROJECTS, TECH_STACK, SOCIALS, CURRENTLY_WORKING_ON } from './constants';
 import GitHubChart from './components/GitHubChart';
 import { Experience, Project } from './types';
 
@@ -77,7 +77,10 @@ const SlideInView: React.FC<{ children: React.ReactNode; direction: 'left' | 'ri
 };
 
 // --- Home View Component ---
-const HomeView: React.FC<{ onOpenProject: (project: Project) => void; isDarkMode: boolean; toggleTheme: () => void }> = ({ onOpenProject, isDarkMode, toggleTheme }) => {
+const HomeView: React.FC<{ onOpenProject: (project: Project) => void; onViewAllProjects: () => void; isDarkMode: boolean; toggleTheme: () => void }> = ({ onOpenProject, onViewAllProjects, isDarkMode, toggleTheme }) => {
+  // Find the project object for "Currently Working On"
+  const workingOnProject = PROJECTS.find(p => p.id === CURRENTLY_WORKING_ON.id);
+
   return (
     <div className="space-y-24 animate-fade-up">
        {/* Header / Hero */}
@@ -107,37 +110,73 @@ const HomeView: React.FC<{ onOpenProject: (project: Project) => void; isDarkMode
             {ABOUT_ME}
           </p>
 
-          <div className="flex flex-wrap items-center gap-4 pt-4">
-            {SOCIALS.map((social) => {
-                const Icon = social.icon === 'Github' ? Github : social.icon === 'Twitter' ? Twitter : Linkedin;
-                return (
-                    <a 
-                        key={social.platform}
-                        href={social.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-secondary hover:text-primary transition-colors hover:scale-110 duration-200"
-                        aria-label={social.platform}
-                    >
-                        <Icon className="w-5 h-5" />
-                    </a>
-                )
-            })}
-             <a href="mailto:shantanutiwarigzb@gmail.com" className="text-secondary hover:text-primary transition-colors hover:scale-110 duration-200" aria-label="Email">
-                <Mail className="w-5 h-5" />
-            </a>
+          <div className="flex flex-wrap items-center justify-between pt-4 gap-y-4">
+            <div className="flex items-center gap-4">
+                {SOCIALS.map((social) => {
+                    const Icon = social.icon === 'Github' ? Github : social.icon === 'Twitter' ? Twitter : Linkedin;
+                    return (
+                        <a 
+                            key={social.platform}
+                            href={social.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-secondary hover:text-primary transition-colors hover:scale-110 duration-200"
+                            aria-label={social.platform}
+                        >
+                            <Icon className="w-5 h-5" />
+                        </a>
+                    )
+                })}
+                 <a href="mailto:shantanutiwarigzb@gmail.com" className="text-secondary hover:text-primary transition-colors hover:scale-110 duration-200" aria-label="Email">
+                    <Mail className="w-5 h-5" />
+                </a>
 
-            <a 
-                href="/resume.pdf" 
-                download="Shantanu_Tiwari_Resume.pdf"
-                className="group flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 hover:bg-primary/10 border border-primary/10 hover:border-primary/20 text-primary transition-all duration-300 text-sm font-medium ml-2"
-                aria-label="Download Resume"
-            >
-                <FileDown className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform duration-300" />
-                <span>Resume</span>
-            </a>
+                <a 
+                    href="/resume.pdf" 
+                    download="Shantanu_Tiwari_Resume.pdf"
+                    className="group flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 hover:bg-primary/10 border border-primary/10 hover:border-primary/20 text-primary transition-all duration-300 text-sm font-medium ml-2"
+                    aria-label="Download Resume"
+                >
+                    <FileDown className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                    <span>Resume</span>
+                </a>
+            </div>
+            
+            <div className="flex items-center gap-2 text-secondary text-sm font-mono opacity-80">
+                <MapPin className="w-4 h-4" />
+                Noida, India
+            </div>
           </div>
         </section>
+
+        {/* Currently Working On Section */}
+        {workingOnProject && (
+            <section className="animate-fade-up delay-200">
+                 <div 
+                    onClick={() => onOpenProject(workingOnProject)}
+                    className="bg-surface/30 backdrop-blur-md rounded-xl border border-white/5 hover:border-primary/10 p-4 sm:p-6 relative overflow-hidden group cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 hover:bg-surface/40"
+                 >
+                     <div className="flex items-start md:items-center gap-4 relative z-10">
+                          <div className="shrink-0 p-3 bg-background/50 rounded-lg text-primary relative group-hover:scale-110 transition-transform duration-300">
+                              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-background z-20">
+                                  <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-75"></div>
+                              </div>
+                              <Loader2 className="w-5 h-5 animate-spin-slow group-hover:animate-spin" />
+                          </div>
+                          <div className="flex-1">
+                              <div className="flex items-center gap-2 mb-1">
+                                  <h3 className="text-xs font-mono uppercase tracking-wider text-secondary group-hover:text-primary transition-colors">Currently Building</h3>
+                              </div>
+                              <p className="text-primary font-medium text-lg group-hover:text-blue-500 transition-colors">{workingOnProject.title}</p>
+                              <p className="text-sm text-secondary mt-1 max-w-xl group-hover:text-primary/80 transition-colors">{workingOnProject.description}</p>
+                          </div>
+                          <div className="hidden sm:block">
+                              <ArrowRight className="w-5 h-5 text-secondary group-hover:text-primary transition-colors transform group-hover:translate-x-1 duration-300" />
+                          </div>
+                     </div>
+                </div>
+            </section>
+        )}
 
         {/* Projects Section */}
         <section className="space-y-8">
@@ -149,7 +188,9 @@ const HomeView: React.FC<{ onOpenProject: (project: Project) => void; isDarkMode
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {PROJECTS.map((project) => (
+                {/* Filter out the project we are currently working on if you don't want it duplicated, or keep it. For now, we list the others. 
+                    Let's just show the top 4 featured ones from constants.ts as usual, maybe filtering out duplicates if needed, but constants has manual order. */}
+                {PROJECTS.filter(p => p.id !== CURRENTLY_WORKING_ON.id).slice(0, 4).map((project) => (
                     <div 
                         key={project.id} 
                         onClick={() => onOpenProject(project)}
@@ -183,6 +224,16 @@ const HomeView: React.FC<{ onOpenProject: (project: Project) => void; isDarkMode
                         </div>
                     </div>
                 ))}
+            </div>
+
+            <div className="flex justify-center">
+                 <button 
+                    onClick={onViewAllProjects}
+                    className="group flex items-center gap-2 px-6 py-3 rounded-full bg-surface/50 border border-border/50 hover:bg-surface text-secondary hover:text-primary transition-all duration-300 text-sm font-medium"
+                 >
+                    View All Projects
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                 </button>
             </div>
         </section>
 
@@ -254,10 +305,6 @@ const HomeView: React.FC<{ onOpenProject: (project: Project) => void; isDarkMode
                 Contributions
             </h2>
             <div className="bg-surface/40 backdrop-blur-md p-6 rounded-xl border border-white/5 shadow-lg">
-                <div className="flex items-center justify-between mb-2">
-                     <span className="text-xs text-secondary font-mono">Last 12 Months</span>
-                     <span className="text-xs text-secondary font-mono">1,248 Contributions</span>
-                </div>
                 <GitHubChart color={isDarkMode ? '#fafafa' : '#18181b'} />
             </div>
         </section>
@@ -270,12 +317,90 @@ const HomeView: React.FC<{ onOpenProject: (project: Project) => void; isDarkMode
   );
 };
 
+// --- All Projects View Component ---
+const AllProjectsView: React.FC<{ onOpenProject: (project: Project) => void; onBack: () => void; isDarkMode: boolean; toggleTheme: () => void }> = ({ onOpenProject, onBack, isDarkMode, toggleTheme }) => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    return (
+        <div className="animate-fade-in space-y-12">
+             {/* Header / Nav */}
+            <div className="flex items-center justify-between sticky top-6 z-40">
+                 <button 
+                    onClick={onBack}
+                    className="group flex items-center gap-2 px-4 py-2 rounded-full bg-surface/50 backdrop-blur-md border border-border/50 text-sm font-medium text-secondary hover:text-primary hover:border-border transition-all"
+                >
+                    <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                    Back
+                 </button>
+
+                 <button 
+                    onClick={toggleTheme}
+                    className="p-2 rounded-full bg-surface/50 backdrop-blur-md border border-border/50 hover:bg-surface text-secondary hover:text-primary transition-all duration-300"
+                >
+                    {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                </button>
+            </div>
+
+            <div className="space-y-6 pt-4">
+                <h1 className="text-3xl md:text-5xl font-bold text-primary tracking-tight">Project Archive</h1>
+                <p className="text-secondary max-w-xl">
+                    A collection of projects I've built, ranging from AI experiments to full-scale web applications.
+                </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6">
+                {PROJECTS.map((project) => (
+                    <div 
+                        key={project.id}
+                        onClick={() => onOpenProject(project)}
+                        className="group flex flex-col md:flex-row items-start gap-6 p-6 rounded-xl bg-surface/30 hover:bg-surface/50 border border-transparent hover:border-border/50 transition-all cursor-pointer"
+                    >
+                        <div className="w-full md:w-48 aspect-video rounded-lg overflow-hidden bg-surface/50 shrink-0">
+                             <img 
+                                src={project.image || `https://picsum.photos/seed/${project.id}/400/300`} 
+                                alt={project.title}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 grayscale group-hover:grayscale-0"
+                            />
+                        </div>
+                        <div className="flex-1 space-y-3">
+                            <div className="flex items-center justify-between">
+                                <h3 className="text-lg font-semibold text-primary group-hover:text-blue-500 transition-colors">{project.title}</h3>
+                                <span className="text-xs font-mono text-secondary">{project.year}</span>
+                            </div>
+                            <p className="text-sm text-secondary leading-relaxed line-clamp-2">{project.description}</p>
+                            <div className="flex flex-wrap gap-2 pt-1">
+                                {project.tags.slice(0, 4).map(tag => (
+                                    <span key={tag} className="text-[10px] font-mono px-2 py-1 rounded bg-background/50 text-secondary">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="hidden md:flex self-center">
+                             <ArrowRight className="w-5 h-5 text-border group-hover:text-primary -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300" />
+                        </div>
+                    </div>
+                ))}
+            </div>
+             {/* Footer */}
+            <footer className="pt-12 pb-8 flex justify-center text-xs text-secondary">
+                <p>© {new Date().getFullYear()} Shantanu Tiwari. All rights reserved.</p>
+            </footer>
+        </div>
+    )
+}
+
 // --- Project Detail Component ---
 const ProjectDetail: React.FC<{ project: Project; onBack: () => void; isDarkMode: boolean; toggleTheme: () => void }> = ({ project, onBack, isDarkMode, toggleTheme }) => {
     // Scroll to top on mount
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    // Check if it's the specific "Northbound" project or generally in progress for custom button behavior
+    const isContributable = project.id === 'northbound' || project.year === 'In Progress';
 
     return (
         <div className="animate-fade-in space-y-12">
@@ -302,14 +427,28 @@ const ProjectDetail: React.FC<{ project: Project; onBack: () => void; isDarkMode
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <h1 className="text-4xl md:text-6xl font-bold text-primary tracking-tight">{project.title}</h1>
                     <div className="flex gap-3">
-                        {project.link && (
+                        {project.link && project.link !== '#' && (
                             <a href={project.link} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-background text-sm font-medium hover:opacity-90 transition-opacity">
                                 Visit Site <ExternalLink className="w-3 h-3" />
                             </a>
                         )}
+                        
                         {project.github && (
-                             <a href={project.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-full bg-surface border border-border text-primary text-sm font-medium hover:bg-border transition-colors">
-                                <Github className="w-3 h-3" /> Code
+                             <a 
+                                href={project.github} 
+                                target="_blank" 
+                                rel="noreferrer" 
+                                className={`flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium transition-colors ${isContributable ? 'bg-primary text-background border-primary hover:opacity-90' : 'bg-surface border-border text-primary hover:bg-border'}`}
+                             >
+                                {isContributable ? (
+                                    <>
+                                        <GitPullRequest className="w-3 h-3" /> Contribute
+                                    </>
+                                ) : (
+                                    <>
+                                        <Github className="w-3 h-3" /> Code
+                                    </>
+                                )}
                             </a>
                         )}
                     </div>
@@ -400,7 +539,8 @@ const ProjectDetail: React.FC<{ project: Project; onBack: () => void; isDarkMode
 // --- Main App Component ---
 const App: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const [currentView, setCurrentView] = useState<'home' | 'project'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'project' | 'all-projects'>('home');
+  const [returnView, setReturnView] = useState<'home' | 'all-projects'>('home'); // Track where to go back to
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   useEffect(() => {
@@ -429,14 +569,20 @@ const App: React.FC = () => {
   };
 
   const handleOpenProject = (project: Project) => {
+      // Remember where we came from
+      if (currentView === 'home' || currentView === 'all-projects') {
+          setReturnView(currentView);
+      }
       setSelectedProject(project);
       setCurrentView('project');
   };
 
-  const handleBackToHome = () => {
-      setCurrentView('home');
-      // Timeout to allow state to settle before clearing data if we want animation, 
-      // but for now immediate is snappier
+  const handleViewAllProjects = () => {
+      setCurrentView('all-projects');
+  }
+
+  const handleBack = () => {
+      setCurrentView(returnView);
       setTimeout(() => setSelectedProject(null), 300);
   };
 
@@ -455,25 +601,33 @@ const App: React.FC = () => {
 
       {/* Main Content Area */}
       <main className="max-w-3xl mx-auto px-6 py-20 md:py-28 relative z-10 min-h-screen">
-          {currentView === 'home' ? (
+          {currentView === 'home' && (
               <HomeView 
-                onOpenProject={handleOpenProject} 
+                onOpenProject={handleOpenProject}
+                onViewAllProjects={handleViewAllProjects}
                 isDarkMode={isDarkMode} 
                 toggleTheme={toggleTheme} 
               />
-          ) : (
-             selectedProject && (
+          )}
+          
+          {currentView === 'project' && selectedProject && (
                  <ProjectDetail 
                     project={selectedProject} 
-                    onBack={handleBackToHome}
+                    onBack={handleBack}
                     isDarkMode={isDarkMode} 
                     toggleTheme={toggleTheme}
                  />
-             )
-          )}
-      </main>
+           )}
 
-      <AIChat />
+           {currentView === 'all-projects' && (
+               <AllProjectsView 
+                    onOpenProject={handleOpenProject}
+                    onBack={() => setCurrentView('home')}
+                    isDarkMode={isDarkMode}
+                    toggleTheme={toggleTheme}
+               />
+           )}
+      </main>
     </div>
   );
 };
