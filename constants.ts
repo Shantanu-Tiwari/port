@@ -76,6 +76,22 @@ export const PROJECTS: Project[] = [
     github: 'https://github.com/Shantanu-Tiwari'
   },
   {
+    id: 'privy',
+    title: 'Privy',
+    description: 'Secure chat room that auto-destructs in 10 minutes for private conversations.',
+    fullDescription: 'Privy is a privacy-focused chat application that creates temporary, secure chat rooms that automatically self-destruct after 10 minutes. Built for sensitive conversations that require ephemeral messaging without data persistence.',
+    challenge: 'Building a real-time chat system with automatic message destruction while ensuring data security and preventing any persistent storage of sensitive conversations.',
+    solution: 'Implemented using Redis for temporary data storage with TTL expiration, Upstash for serverless Redis hosting, and real-time WebSocket connections for instant messaging with automatic cleanup.',
+    features: ['Auto-Destruct Messages', 'Real-time Chat', 'No Data Persistence', 'Secure Rooms', 'Privacy Focused'],
+    tags: ['Next.js', 'Redis', 'Upstash', 'WebSockets', 'Privacy Tech'],
+    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=2070&auto=format&fit=crop',
+    featured: false,
+    year: '2025',
+    role: 'Creator',
+    link: 'https://privy.shantanutiwari.me/',
+    github: '#'
+  },
+  {
     id: 'proj2',
     title: 'EvoScan',
     description: 'Pathogenic variant prediction platform using the Evo2 deep learning model.',
@@ -90,6 +106,22 @@ export const PROJECTS: Project[] = [
     role: 'Lead Developer',
     link: 'https://evo-scan.vercel.app/',
     github: 'https://github.com/Shantanu-Tiwari'
+  },
+  {
+    id: 'canvas',
+    title: 'Canvas',
+    description: 'Create beautiful code screenshots for free - perfect for Twitter, Instagram, and social media.',
+    fullDescription: 'Canvas is a free web-based tool that transforms your code into stunning, shareable screenshots. Designed for developers who want to showcase their work on social media platforms like Twitter and Instagram with beautiful, customizable code presentations.',
+    challenge: 'Creating an intuitive interface that generates high-quality, visually appealing code screenshots while maintaining readability and aesthetic appeal across different social media formats.',
+    solution: 'Built a responsive web application with customizable themes, syntax highlighting, and export options optimized for various social media dimensions and requirements.',
+    features: ['Syntax Highlighting', 'Multiple Themes', 'Social Media Optimization', 'Export Options', 'Free to Use'],
+    tags: ['Next.js', 'React', 'Tailwind CSS', 'Canvas API', 'TypeScript'],
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop',
+    featured: false,
+    year: '2025',
+    role: 'Creator',
+    link: 'https://canvas.shantanutiwari.me/',
+    github: '#'
   },
   {
     id: 'proj3',

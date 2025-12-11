@@ -582,7 +582,7 @@ const App: React.FC = () => {
   }
 
   const handleBack = () => {
-      setCurrentView(returnView);
+      setCurrentView('home');
       setTimeout(() => setSelectedProject(null), 300);
   };
 
